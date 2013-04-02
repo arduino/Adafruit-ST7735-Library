@@ -115,6 +115,9 @@ class Adafruit_ST7735 : public Adafruit_GFX {
            invertDisplay(boolean i);
   uint16_t Color565(uint8_t r, uint8_t g, uint8_t b);
 
+  uint16_t newColor(uint8_t r, uint8_t g, uint8_t b) { return Color565(r, g, b);}
+
+  
   /* These are not for current use, 8-bit protocol only!
   uint8_t  readdata(void),
            readcommand8(uint8_t);
