@@ -113,10 +113,7 @@ class Adafruit_ST7735 : public Adafruit_GFX {
              uint16_t color),
            setRotation(uint8_t r),
            invertDisplay(boolean i);
-  uint16_t Color565(uint8_t r, uint8_t g, uint8_t b);
-
-  uint16_t newColor(uint8_t r, uint8_t g, uint8_t b) { return Color565(r, g, b);}
-
+  uint16_t Color565(uint8_t r, uint8_t g, uint8_t b) { return newColor(r, g, b);}
   
   /* These are not for current use, 8-bit protocol only!
   uint8_t  readdata(void),
