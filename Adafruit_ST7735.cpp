@@ -56,8 +56,7 @@ inline void Adafruit_ST7735::spiwrite(uint8_t c) {
   //Serial.println(c, HEX);
 
   if (hwSPI) {
-    SPDR = c;
-    while(!(SPSR & _BV(SPIF)));
+    SPI.transfer(c);
   } else {
     // Fast SPI bitbang swiped from LPD8806 library
     for(uint8_t bit = 0x80; bit; bit >>= 1) {
@@ -271,7 +270,11 @@ void Adafruit_ST7735::commonInit(uint8_t *cmdList) {
 
   if(hwSPI) { // Using hardware SPI
     SPI.begin();
+#if defined(ARDUINO_ARCH_SAM)
+    SPI.setClockDivider(24); // 4 MHz (half speed)
+#else
     SPI.setClockDivider(SPI_CLOCK_DIV4); // 4 MHz (half speed)
+#endif
     SPI.setBitOrder(MSBFIRST);
     SPI.setDataMode(SPI_MODE0);
   } else {
