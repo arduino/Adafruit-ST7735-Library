@@ -134,10 +134,17 @@ class Adafruit_ST7735 : public Adafruit_GFX {
 //uint8_t  spiread(void);
 
   boolean  hwSPI;
+ #if defined(ARDUINO_ARCH_SAM)
+  volatile uint32_t *dataport, *clkport, *csport, *rsport;
+  uint32_t  _cs, _rs, _rst, _sid, _sclk,
+           datapinmask, clkpinmask, cspinmask, rspinmask,
+           colstart, rowstart; // some displays need this changed
+ #else
   volatile uint8_t *dataport, *clkport, *csport, *rsport;
   uint8_t  _cs, _rs, _rst, _sid, _sclk,
            datapinmask, clkpinmask, cspinmask, rspinmask,
            colstart, rowstart; // some displays need this changed
+ #endif   
 };
 
 #endif
